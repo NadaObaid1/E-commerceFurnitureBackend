@@ -6,7 +6,7 @@ import { endPoint } from "./Categories.EndPoint.js"
 
 const router = Router()
 
-router.get("/", auth(endPoint.getAlls), ControllerCatogores.getCatogorires)
-router.get("/:id", auth(endPoint.specific), ControllerCatogores.getSpecficCatogorires)
+router.get("/", ControllerCatogores.getCatogorires)
+router.get("/:id", ControllerCatogores.getSpecficCatogorires)
 router.post("/", auth(endPoint.create), fileUpload(fileValidation.image).single('image'), ControllerCatogores.CreateCategory)
 export default router
