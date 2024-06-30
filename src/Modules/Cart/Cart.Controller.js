@@ -96,7 +96,7 @@ export const clearCart = async(req, res)=>{
 
 export const getCart = async (req, res) => {  
     try {
-        const cart = await cartModel.findOne({ userId: req.user._id }).populate('products.productId', 'name image finalPrice stock');
+        const cart = await cartModel.findOne({ userId: req.user._id }).populate('products.productId', 'name mainImage finalPrice stock');
 
         return res.status(200).json({ message: "success", cart });
     } catch (error) {
