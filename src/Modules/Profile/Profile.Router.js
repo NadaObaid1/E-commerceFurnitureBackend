@@ -7,6 +7,6 @@ const router = Router()
 
 
 router.put('/profile/:id', auth([roles.Admin, roles.User, roles.Manager]), profileController.updateProfile);
-
+router.get('/profile/:id', auth([roles.Admin, roles.User, roles.Manager]), profileController.getProfile);
 
 export default router;  
