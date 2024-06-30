@@ -1,4 +1,3 @@
-// favorite.controller.js
 import FavoriteModel from '../../../DB/Model/Favorite.Model.js';
 import productModel from '../../../DB/Model/Product.Model.js';
 
@@ -47,20 +46,20 @@ export const removeItem = async (req, res) => {
 }
 
 export const getFavorite = async (req, res) => {
-  try {
-      const favorite = await FavoriteModel.findOne({ userId: req.user._id })
-          .populate({
-              path: 'products.productId',
-              select: 'name mainImage.secure_url finalPrice'
-          });
+    try {
+        const favorite = await FavoriteModel.findOne({ userId: req.user._id })
+            .populate({
+                path: 'products.productId',
+                select: 'name mainImage finalPrice'
+            });
 
-      console.log(favorite);
+        console.log(favorite); // تحقق من محتوى البيانات المستردة
 
-      return res.status(200).json({ message: "success", favorite });
-  } catch (error) {
-      console.error('Error fetching Favorite:', error);
-      return res.status(500).json({ message: 'Internal server error' });
-  }
+        return res.status(200).json({ message: "success", favorite });
+    } catch (error) {
+        console.error('Error fetching Favorite:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
 };
 
 export const clearFavorite = async (req, res) => {
