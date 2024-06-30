@@ -3,7 +3,7 @@ import CategoryModel from '../../../DB/Model/Category.Model.js'
 import cloudinary from "../../Services/Cloudinary.js"
 
 export const getCatogorires = async(req, res)=>{
-    const Categories = await CategoryModel.find().select('Name')//لو درجع بس الاسم مثلا واكيد رح يرجع ال id
+    const Categories = await CategoryModel.find().select('Name image')//لو درجع بس الاسم مثلا واكيد رح يرجع ال id
     return res.status(200).json({message: "success", Categories})
 }
 
