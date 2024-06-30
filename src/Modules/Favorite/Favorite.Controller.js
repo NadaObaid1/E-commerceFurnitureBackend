@@ -47,7 +47,7 @@ return res.status(200).json({message:"success"});
 
 export const getFavorite = async (req, res) => {
     try {
-        const Favorite = await FavoriteModel.findOne({ userId: req.user._id }).populate('products.productId', 'name image finalPrice');
+        const Favorite = await FavoriteModel.findOne({ userId: req.user._id }).populate('products.productId', 'name image.secure_url finalPrice');
 
         return res.status(200).json({ message: "success", Favorite });
     } catch (error) {
