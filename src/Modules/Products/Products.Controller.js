@@ -6,7 +6,7 @@ export const getProducts = async (req, res) => {
         const products = await productModel.find({ 
             isDeleted: false,
             status: 'Active'
-        }).select('name description finalPrice discount stock number_sellers rate status image');
+        }).select('name description finalPrice discount stock number_sellers rate status mainImage subImages');
 
         res.status(200).json({ message: "Success", products });
     } catch (error) {
