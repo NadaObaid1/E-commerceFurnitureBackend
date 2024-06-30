@@ -9,7 +9,7 @@ export const createSuggestedDecorations = async (req, res) => {
     })
     const newSuggestedDecorations = await SuggestedDecorationsModel.create({image: {secure_url, public_id}})
     
-    res.status(201).json(newSuggestedDecorations);
+    return res.status(201).json({ message: "success", newSuggestedDecorations });
     
   } catch (error) {
     console.log(error);
@@ -22,7 +22,7 @@ export const createSuggestedDecorations = async (req, res) => {
 export const getAllSuggestedDecorations = async (req, res) => {
     try {
       const SuggestedDecorations = await SuggestedDecorationsModel.find(); 
-      res.status(200).json(SuggestedDecorations);
+      return res.status(201).json({ message: "success", SuggestedDecorations });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
