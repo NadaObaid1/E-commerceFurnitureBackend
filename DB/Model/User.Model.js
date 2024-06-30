@@ -24,10 +24,6 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    confirmpassword:{
-        type: String,
-        default: false,
-    },
     confirmEmail:{
         type: Boolean,
         default: false
