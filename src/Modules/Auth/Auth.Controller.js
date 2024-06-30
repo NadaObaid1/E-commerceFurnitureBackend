@@ -53,7 +53,7 @@ const html = `
 `;
 
 export const SignUp = async (req, res) => {
-  const { userName, email, phone, address, password, confirmpassword } =
+  const { userName, email, phone, address, password } =
     req.body;
   const User = await UserModel.findOne({ email });
   if (User) {
@@ -63,9 +63,6 @@ export const SignUp = async (req, res) => {
     password,
     parseInt(process.env.SALT_ROUND)
   );
-  if (password !== confirmpassword) {
-    return res.status(400).json({ message: "Passwords do not match" });
-  }
   
   let secure_url, public_id;
   try {
@@ -90,7 +87,6 @@ export const SignUp = async (req, res) => {
     email,
     phone,
     address,
-    confirmpassword: true,
     password: hashedpassword,
     image: {secure_url, public_id}
   });
