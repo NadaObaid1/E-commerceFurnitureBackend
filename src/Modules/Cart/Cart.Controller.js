@@ -95,14 +95,22 @@ export const clearCart = async(req, res)=>{
 
 
 export const getCart = async (req, res) => {  
-    try {
-        const cart = await cartModel.findOne({ userId: req.user._id }).populate('products.productId', 'name mainImage finalPrice stock');
+  try {
+    const cart = await cartModel.findOne({ userId: req.user._id }).populate('products.productId', 'name mainImage finalPrice stock');
 
-        return res.status(200).json({ message: "success", cart });
-    } catch (error) {
-        console.error('Error fetching cart:', error);
-        return res.status(500).json({ message: 'Internal server error' });
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
     }
+    const uniqueProducts = new Set();
+    cart.products.forEach(product => {
+      uniqueProducts.add(product.productId._id.toString());
+    });
+
+    return res.status(200).json({ message: "success", cart, productCount: uniqueProducts.size });
+  } catch (error) {
+    console.error('Error fetching cart:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 };
 
 export const calculateTotalPrice = async (req, res) => {
