@@ -14,7 +14,7 @@ export const updateProfile = async (req, res) => {
     );
 
     if (updatedProfile) {
-      res.status(200).json(updatedProfile);
+      return res.status(200).json({ message: "success", updatedProfile });
     } else {
       res.status(404).json({ message: 'Profile not found' });
     }
@@ -33,7 +33,7 @@ export const getProfile = async (req, res) => {
     const profile = await UserModel.findById(userId);
 
     if (profile) {
-      res.status(200).json(profile);
+      return res.status(200).json({ message: "success", profile });
     } else {
       res.status(404).json({ message: 'Profile not found' });
     }
